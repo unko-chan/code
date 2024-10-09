@@ -6,6 +6,8 @@ import java.util.List;
 
 public class BookStore
 {
+    private static final int DECADE_ROUNDING = 10;
+    private static final int MAX_DECADE_VALUE = 9;
 
     private final String name;
     private List<Novel> novels;
@@ -156,9 +158,19 @@ public class BookStore
 
     public void printGroupByDecade(final int decade)
     {
-//	        Prints all books for the inputted
-//	    	decade IE 2000s -> print all book
-//	    	titles from 2000 - 2009
+        final int lowerLimit;
+        final int upperLimit;
+
+        lowerLimit = (decade / DECADE_ROUNDING) * DECADE_ROUNDING;
+        upperLimit = lowerLimit + MAX_DECADE_VALUE;
+
+        for(Novel novel : novels)
+        {
+            if(novel.getYearPublished() < upperLimit && novel.getYearPublished() >= lowerLimit)
+            {
+                System.out.println(novel.getTitle());
+            }
+        }
     }
 
     public void isThereABookWrittenIn(final int year)
