@@ -173,7 +173,7 @@ public class BookStore
         }
     }
 
-    public void isThereABookWrittenIn(final int year)
+    public boolean isThereABookWrittenIn(final int year)
     {
         // Returns true or false
     }
