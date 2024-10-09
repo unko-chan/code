@@ -175,12 +175,40 @@ public class BookStore
 
     public boolean isThereABookWrittenIn(final int year)
     {
-        // Returns true or false
+        for(Novel novel : novels)
+        {
+            if(novel.getYearPublished() == year)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void getLongest()
     {
-        // Find the longest title in the bookstore
+        int longestTitleLength;
+        String longestTitleString;
+
+        longestTitleLength = 0;
+        longestTitleString = null;
+
+        for(Novel novel : novels)
+        {
+            int titleLength;
+            String titleString;
+
+            titleString = novel.getTitle();
+            titleLength = titleString.length();
+
+            if(titleLength > longestTitleLength)
+            {
+                longestTitleLength = titleLength;
+                longestTitleString = titleString;
+            }
+        }
+
+        System.out.println("Longest Title: " + longestTitleString);
     }
 
     public void howManyBooksContain(final String word)
