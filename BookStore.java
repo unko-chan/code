@@ -211,7 +211,7 @@ public class BookStore
         System.out.println("Longest Title: " + longestTitleString);
     }
 
-    public void howManyBooksContain(final String word)
+    public int howManyBooksContain(final String word)
     {
         // Returns the amount of Books that contain this word in their title
     }
