@@ -213,7 +213,23 @@ public class BookStore
 
     public int howManyBooksContain(final String word)
     {
-        // Returns the amount of Books that contain this word in their title
+        int bookCounter;
+
+        bookCounter = 0;
+
+        for(Novel novel : novels)
+        {
+            String novelTitle;
+
+            novelTitle = novel.getTitle();
+
+            if(novelTitle.toLowerCase().contains(word.toLowerCase()))
+            {
+                bookCounter++;
+            }
+        }
+
+        return bookCounter;
     }
 
     public void whichPercentWrittenBetween(final int first, final int last)
