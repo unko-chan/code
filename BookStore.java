@@ -1,9 +1,6 @@
 package bcit.ca.comp2522.code;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.HashMap;
+import java.util.*;
 
 public class BookStore
 {
@@ -12,7 +9,7 @@ public class BookStore
 
     private final String name;
     private final List<Novel> novels;
-    private final HashMap<String, Novel> novelHashMap;
+    private HashMap<String, Novel> novelHashMap;
 
 
     public BookStore(final String name)
@@ -327,6 +324,37 @@ public class BookStore
         }
     }
 
+    public void removeNovels() {
+        List<String> keysToRemove = new ArrayList<>();
+
+        for (String key : novelHashMap.keySet()) {
+            if (key.toLowerCase().contains("the")) {
+                keysToRemove.add(key);
+            }
+        }
+
+        for (String key : keysToRemove) {
+            novelHashMap.remove(key);
+        }
+    }
+
+    public void sortAndPrintNovels()
+    {
+        Set<String> keySet;
+        List<String> keyList;
+
+        keySet = novelHashMap.keySet();
+        keyList = new ArrayList<>(keySet);
+
+        Collections.sort(keyList);
+
+        for(String key : keyList)
+        {
+            System.out.println(novelHashMap.get(key)
+            );
+        }
+    }
+
     public static void main(final String[] args)
     {
         final BookStore bookstore;
@@ -358,6 +386,8 @@ public class BookStore
         fifteenCharTitles.forEach(novel -> System.out.println(novel.getTitle()));
 
         bookstore.printHashMap();
+        bookstore.removeNovels();
+        bookstore.sortAndPrintNovels();
     }
 
 }
