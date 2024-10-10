@@ -265,7 +265,28 @@ public class BookStore
 
     public void getOldestBook()
     {
-        // Returns the oldest book
+        int oldestTitleYear;
+        String oldestTitleString;
+
+        oldestTitleYear = 0;
+        oldestTitleString = null;
+
+        for(Novel novel : novels)
+        {
+            int titleYear;
+            String titleString;
+
+            titleString = novel.getTitle();
+            titleYear = novel.getYearPublished();
+
+            if(titleYear < oldestTitleYear)
+            {
+                oldestTitleYear = titleYear;
+                oldestTitleString = titleString;
+            }
+        }
+
+        System.out.println("Oldest Title: " + oldestTitleString);
     }
 
     public void getBooksThisLength(final int titleLength)
