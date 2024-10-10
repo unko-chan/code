@@ -20,7 +20,7 @@ public class BookShop
 
     private void populateHashMap(final HashMap<String, Novel> novelHashMap, final List<Novel> novels)
     {
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             novelHashMap.put(novel.getTitle(), novel);
         }
@@ -28,7 +28,7 @@ public class BookShop
 
     public void printHashMap()
     {
-        for(HashMap.Entry<String, Novel> novel : novelHashMap.entrySet())
+        for(final HashMap.Entry<String, Novel> novel : novelHashMap.entrySet())
         {
             System.out.println(novel.getKey());
         }
@@ -40,7 +40,7 @@ public class BookShop
 
         keysToRemove = new ArrayList<>();
 
-        for(String key : novelHashMap.keySet())
+        for(final String key : novelHashMap.keySet())
         {
             if(key.toLowerCase().contains("the"))
             {
@@ -48,7 +48,7 @@ public class BookShop
             }
         }
 
-        for(String key : keysToRemove)
+        for(final String key : keysToRemove)
         {
             novelHashMap.remove(key);
         }
@@ -64,7 +64,7 @@ public class BookShop
 
         Collections.sort(keyList);
 
-        for(String key : keyList)
+        for(final String key : keyList)
         {
             System.out.println(novelHashMap.get(key));
         }

@@ -127,7 +127,7 @@ public class BookStore
 
     public void printAllTitles()
     {
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             System.out.println(novel.getTitle().toUpperCase());
         }
@@ -135,7 +135,7 @@ public class BookStore
 
     public void printBookTitle(final String title)
     {
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getTitle().toLowerCase().contains(title.toLowerCase()))
             {
@@ -150,14 +150,14 @@ public class BookStore
 
         titles = new ArrayList<>();
 
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             titles.add(novel.getTitle());
         }
 
         Collections.sort(titles);
 
-        for(String title : titles)
+        for(final String title : titles)
         {
             System.out.println(title);
         }
@@ -171,7 +171,7 @@ public class BookStore
         lowerLimit = (decade / DECADE_ROUNDING) * DECADE_ROUNDING;
         upperLimit = lowerLimit + MAX_DECADE_VALUE;
 
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getYearPublished() <= upperLimit && novel.getYearPublished() >= lowerLimit)
             {
@@ -182,7 +182,7 @@ public class BookStore
 
     public boolean isThereABookWrittenIn(final int year)
     {
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getYearPublished() == year)
             {
@@ -198,7 +198,7 @@ public class BookStore
 
         longestTitleString = "";
 
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getTitle().length() > longestTitleString.length())
             {
@@ -214,7 +214,7 @@ public class BookStore
 
         bookCounter = 0;
 
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getTitle().toLowerCase().contains(word.toLowerCase()))
             {
@@ -230,7 +230,7 @@ public class BookStore
 
         bookCounter = 0;
 
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getYearPublished() >= first && novel.getYearPublished() <= last)
             {
@@ -248,7 +248,7 @@ public class BookStore
         oldestTitle = null;
         oldestTitleYear = Integer.MAX_VALUE;
 
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getYearPublished() < oldestTitleYear)
             {
@@ -264,7 +264,7 @@ public class BookStore
         final List<Novel> matchingNovels;
         matchingNovels = new ArrayList<>();
 
-        for(Novel novel : novels)
+        for(final Novel novel : novels)
         {
             if(novel.getTitle().length() == titleLength)
             {
