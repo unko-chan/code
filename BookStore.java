@@ -3,6 +3,7 @@ package bcit.ca.comp2522.code;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.HashMap;
 
 public class BookStore
 {
@@ -11,12 +12,25 @@ public class BookStore
 
     private final String name;
     private List<Novel> novels;
+    private HashMap<String, Novel> novelHashMap;
+
 
     public BookStore(final String name)
     {
         this.name = name;
         this.novels = new ArrayList<>();
+        this.novelHashMap = new HashMap<String, Novel>();
+
         populateNovels();
+        populateHashMap(novelHashMap, novels);
+    }
+
+    private void populateHashMap(HashMap<String, Novel> novelHashMap, List<Novel> novels)
+    {
+        for(Novel novel : novels)
+        {
+            novelHashMap.put(novel.getTitle(), novel);
+        }
     }
 
     private void populateNovels()
@@ -263,7 +277,8 @@ public class BookStore
         int oldestTitleYear;
         Novel oldestTitle;
 
-        oldestTitleYear = Integer.MAX_VALUE;;
+        oldestTitleYear = Integer.MAX_VALUE;
+        ;
         oldestTitle = null;
 
         for(Novel novel : novels)
