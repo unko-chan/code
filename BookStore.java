@@ -11,8 +11,8 @@ public class BookStore
     private static final int MAX_DECADE_VALUE = 9;
 
     private final String name;
-    private List<Novel> novels;
-    private HashMap<String, Novel> novelHashMap;
+    private final List<Novel> novels;
+    private final HashMap<String, Novel> novelHashMap;
 
 
     public BookStore(final String name)
@@ -319,6 +319,14 @@ public class BookStore
         return matchingNovels;
     }
 
+    public void printHashMap()
+    {
+        for(HashMap.Entry<String, Novel> novel : novelHashMap.entrySet())
+        {
+            System.out.println(novel.getKey());
+        }
+    }
+
     public static void main(final String[] args)
     {
         final BookStore bookstore;
@@ -349,6 +357,7 @@ public class BookStore
         fifteenCharTitles = bookstore.getBooksThisLength(15);
         fifteenCharTitles.forEach(novel -> System.out.println(novel.getTitle()));
 
+        bookstore.printHashMap();
     }
 
 }
