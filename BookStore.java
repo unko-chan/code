@@ -241,7 +241,9 @@ public class BookStore
 
     public List<Novel> getBooksThisLength(final int titleLength)
     {
-        List<Novel> matchingNovels = new ArrayList<>();
+        List<Novel> matchingNovels;
+        matchingNovels = new ArrayList<>();
+
         for(Novel novel : novels)
         {
             if(novel.getTitle().length() == titleLength)
