@@ -1,6 +1,8 @@
 package bcit.ca.comp2522.code;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BookStore
 {
@@ -8,26 +10,15 @@ public class BookStore
     private static final int MAX_DECADE_VALUE = 9;
 
     private final String name;
-    private final List<Novel> novels;
-    private HashMap<String, Novel> novelHashMap;
+    protected List<Novel> novels;
 
 
     public BookStore(final String name)
     {
+        super();
         this.name = name;
         this.novels = new ArrayList<>();
-        this.novelHashMap = new HashMap<String, Novel>();
-
         populateNovels();
-        populateHashMap(novelHashMap, novels);
-    }
-
-    private void populateHashMap(HashMap<String, Novel> novelHashMap, List<Novel> novels)
-    {
-        for(Novel novel : novels)
-        {
-            novelHashMap.put(novel.getTitle(), novel);
-        }
     }
 
     private void populateNovels()
@@ -142,7 +133,7 @@ public class BookStore
         }
     }
 
-    public void printBookTitle(String title)
+    public void printBookTitle(final String title)
     {
         for(Novel novel : novels)
         {
@@ -169,11 +160,8 @@ public class BookStore
 
     public void printGroupByDecade(final int decade)
     {
-        final int lowerLimit;
-        final int upperLimit;
-
-        lowerLimit = (decade / DECADE_ROUNDING) * DECADE_ROUNDING;
-        upperLimit = lowerLimit + MAX_DECADE_VALUE;
+        final int lowerLimit = (decade / DECADE_ROUNDING) * DECADE_ROUNDING;
+        final int upperLimit = lowerLimit + MAX_DECADE_VALUE;
 
         for(Novel novel : novels)
         {
@@ -198,161 +186,70 @@ public class BookStore
 
     public void getLongest()
     {
-        int longestTitleLength;
-        String longestTitleString;
-
-        longestTitleLength = 0;
-        longestTitleString = null;
-
+        String longestTitleString = "";
         for(Novel novel : novels)
         {
-            int titleLength;
-            String titleString;
-
-            titleString = novel.getTitle();
-            titleLength = titleString.length();
-
-            if(titleLength > longestTitleLength)
+            if(novel.getTitle().length() > longestTitleString.length())
             {
-                longestTitleLength = titleLength;
-                longestTitleString = titleString;
+                longestTitleString = novel.getTitle();
             }
         }
-
         System.out.println("Longest Title: " + longestTitleString);
     }
 
     public int howManyBooksContain(final String word)
     {
-        int bookCounter;
-
-        bookCounter = 0;
-
+        int bookCounter = 0;
         for(Novel novel : novels)
         {
-            String novelTitle;
-
-            novelTitle = novel.getTitle();
-
-            if(novelTitle.toLowerCase().contains(word.toLowerCase()))
+            if(novel.getTitle().toLowerCase().contains(word.toLowerCase()))
             {
                 bookCounter++;
             }
         }
-
         return bookCounter;
     }
 
     public double whichPercentWrittenBetween(final int first, final int last)
     {
-        final double percentageOfBooks;
-        final int totalNumberBooks;
-        int bookCounter;
-
-        totalNumberBooks = novels.size();
-        bookCounter = 0;
-
+        int bookCounter = 0;
         for(Novel novel : novels)
         {
-            final int yearPublished;
-
-            yearPublished = novel.getYearPublished();
-
-            if(yearPublished >= first && yearPublished <= last)
+            if(novel.getYearPublished() >= first && novel.getYearPublished() <= last)
             {
                 bookCounter++;
             }
         }
-
-        percentageOfBooks = ((double) bookCounter / totalNumberBooks) * 100;
-
-        return percentageOfBooks;
+        return ((double) bookCounter / novels.size()) * 100;
     }
 
     public Novel getOldestBook()
     {
-        int oldestTitleYear;
-        Novel oldestTitle;
-
-        oldestTitleYear = Integer.MAX_VALUE;
-        ;
-        oldestTitle = null;
+        Novel oldestTitle = null;
+        int oldestTitleYear = Integer.MAX_VALUE;
 
         for(Novel novel : novels)
         {
-            int titleYear;
-
-            titleYear = novel.getYearPublished();
-
-            if(titleYear < oldestTitleYear)
+            if(novel.getYearPublished() < oldestTitleYear)
             {
-                oldestTitleYear = titleYear;
+                oldestTitleYear = novel.getYearPublished();
                 oldestTitle = novel;
             }
         }
-
         return oldestTitle;
     }
 
     public List<Novel> getBooksThisLength(final int titleLength)
     {
-        // Returns a List of all books whose title is this length
-        List<Novel> matchingNovels;
-
-        matchingNovels = new ArrayList<>();
-
+        List<Novel> matchingNovels = new ArrayList<>();
         for(Novel novel : novels)
         {
-            final int novelTitleLength;
-
-            novelTitleLength = novel.getTitle().length();
-
-            if(novelTitleLength == titleLength)
+            if(novel.getTitle().length() == titleLength)
             {
                 matchingNovels.add(novel);
             }
         }
-
         return matchingNovels;
-    }
-
-    public void printHashMap()
-    {
-        for(HashMap.Entry<String, Novel> novel : novelHashMap.entrySet())
-        {
-            System.out.println(novel.getKey());
-        }
-    }
-
-    public void removeNovels() {
-        List<String> keysToRemove = new ArrayList<>();
-
-        for (String key : novelHashMap.keySet()) {
-            if (key.toLowerCase().contains("the")) {
-                keysToRemove.add(key);
-            }
-        }
-
-        for (String key : keysToRemove) {
-            novelHashMap.remove(key);
-        }
-    }
-
-    public void sortAndPrintNovels()
-    {
-        Set<String> keySet;
-        List<String> keyList;
-
-        keySet = novelHashMap.keySet();
-        keyList = new ArrayList<>(keySet);
-
-        Collections.sort(keyList);
-
-        for(String key : keyList)
-        {
-            System.out.println(novelHashMap.get(key)
-            );
-        }
     }
 
     public static void main(final String[] args)
@@ -384,10 +281,5 @@ public class BookStore
         System.out.println("\nBooks with titles 15 characters long:");
         fifteenCharTitles = bookstore.getBooksThisLength(15);
         fifteenCharTitles.forEach(novel -> System.out.println(novel.getTitle()));
-
-        bookstore.printHashMap();
-        bookstore.removeNovels();
-        bookstore.sortAndPrintNovels();
     }
-
 }
