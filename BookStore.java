@@ -146,12 +146,17 @@ public class BookStore
 
     public void printTitlesInAlphaOrder()
     {
-        List<String> titles = new ArrayList<>();
+        final List<String> titles;
+
+        titles = new ArrayList<>();
+
         for(Novel novel : novels)
         {
             titles.add(novel.getTitle());
         }
+
         Collections.sort(titles);
+
         for(String title : titles)
         {
             System.out.println(title);
@@ -160,8 +165,11 @@ public class BookStore
 
     public void printGroupByDecade(final int decade)
     {
-        final int lowerLimit = (decade / DECADE_ROUNDING) * DECADE_ROUNDING;
-        final int upperLimit = lowerLimit + MAX_DECADE_VALUE;
+        final int lowerLimit;
+        final int upperLimit;
+
+        lowerLimit = (decade / DECADE_ROUNDING) * DECADE_ROUNDING;
+        upperLimit = lowerLimit + MAX_DECADE_VALUE;
 
         for(Novel novel : novels)
         {
@@ -186,7 +194,10 @@ public class BookStore
 
     public void getLongest()
     {
-        String longestTitleString = "";
+        String longestTitleString;
+
+        longestTitleString = "";
+
         for(Novel novel : novels)
         {
             if(novel.getTitle().length() > longestTitleString.length())
@@ -199,7 +210,10 @@ public class BookStore
 
     public int howManyBooksContain(final String word)
     {
-        int bookCounter = 0;
+        int bookCounter;
+
+        bookCounter = 0;
+
         for(Novel novel : novels)
         {
             if(novel.getTitle().toLowerCase().contains(word.toLowerCase()))
@@ -212,7 +226,10 @@ public class BookStore
 
     public double whichPercentWrittenBetween(final int first, final int last)
     {
-        int bookCounter = 0;
+        int bookCounter;
+
+        bookCounter = 0;
+
         for(Novel novel : novels)
         {
             if(novel.getYearPublished() >= first && novel.getYearPublished() <= last)
@@ -225,8 +242,11 @@ public class BookStore
 
     public Novel getOldestBook()
     {
-        Novel oldestTitle = null;
-        int oldestTitleYear = Integer.MAX_VALUE;
+        Novel oldestTitle;
+        int oldestTitleYear;
+
+        oldestTitle = null;
+        oldestTitleYear = Integer.MAX_VALUE;
 
         for(Novel novel : novels)
         {
@@ -241,7 +261,7 @@ public class BookStore
 
     public List<Novel> getBooksThisLength(final int titleLength)
     {
-        List<Novel> matchingNovels;
+        final List<Novel> matchingNovels;
         matchingNovels = new ArrayList<>();
 
         for(Novel novel : novels)

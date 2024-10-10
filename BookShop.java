@@ -36,7 +36,10 @@ public class BookShop
 
     public void removeNovels()
     {
-        List<String> keysToRemove = new ArrayList<>();
+        final List<String> keysToRemove;
+
+        keysToRemove = new ArrayList<>();
+
         for(String key : novelHashMap.keySet())
         {
             if(key.toLowerCase().contains("the"))
@@ -44,6 +47,7 @@ public class BookShop
                 keysToRemove.add(key);
             }
         }
+
         for(String key : keysToRemove)
         {
             novelHashMap.remove(key);
@@ -52,8 +56,12 @@ public class BookShop
 
     public void sortAndPrintNovels()
     {
-        Set<String> keySet = novelHashMap.keySet();
-        List<String> keyList = new ArrayList<>(keySet);
+        final Set<String> keySet;
+        final List<String> keyList;
+
+        keySet = novelHashMap.keySet();
+        keyList = new ArrayList<>(keySet);
+
         Collections.sort(keyList);
 
         for(String key : keyList)
@@ -64,11 +72,13 @@ public class BookShop
 
     public static void main(final String[] args)
     {
-        BookStore bookstore = new BookStore("Classic Novels Collection");
-        // Retrieves the list from the BookStore
-        List<Novel> novels = bookstore.novels;
+        final BookStore bookstore;
+        final List<Novel> novels;
+        final BookShop bookShop;
 
-        BookShop bookShop = new BookShop("Classic Novels Collection", novels);
+        bookstore = new BookStore("Classic Novels Collection");
+        novels = bookstore.novels;
+        bookShop = new BookShop("Classic Novels Collection", novels);
 
         System.out.println("All Titles in HashMap:");
         bookShop.printHashMap();
