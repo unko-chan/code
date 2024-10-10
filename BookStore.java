@@ -232,7 +232,7 @@ public class BookStore
         return bookCounter;
     }
 
-    public void whichPercentWrittenBetween(final int first, final int last)
+    public double whichPercentWrittenBetween(final int first, final int last)
     {
         final double percentageOfBooks;
         final int totalNumberBooks;
@@ -240,12 +240,6 @@ public class BookStore
 
         totalNumberBooks = novels.size();
         bookCounter = 0;
-
-        if(totalNumberBooks == 0)
-        {
-            System.out.println("No books available to calculate percentage.");
-            return;
-        }
 
         for(Novel novel : novels)
         {
@@ -261,33 +255,31 @@ public class BookStore
 
         percentageOfBooks = ((double) bookCounter / totalNumberBooks) * 100;
 
-        System.out.println("Percentage of books: " + percentageOfBooks + "%");
+        return percentageOfBooks;
     }
 
-    public void getOldestBook()
+    public Novel getOldestBook()
     {
         int oldestTitleYear;
-        String oldestTitleString;
+        Novel oldestTitle;
 
         oldestTitleYear = 0;
-        oldestTitleString = null;
+        oldestTitle = null;
 
         for(Novel novel : novels)
         {
             int titleYear;
-            String titleString;
 
-            titleString = novel.getTitle();
             titleYear = novel.getYearPublished();
 
             if(titleYear < oldestTitleYear)
             {
                 oldestTitleYear = titleYear;
-                oldestTitleString = titleString;
+                oldestTitle = novel;
             }
         }
 
-        System.out.println("Oldest Title: " + oldestTitleString);
+        return oldestTitle;
     }
 
     public List<Novel> getBooksThisLength(final int titleLength)
