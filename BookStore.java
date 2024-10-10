@@ -234,8 +234,33 @@ public class BookStore
 
     public void whichPercentWrittenBetween(final int first, final int last)
     {
-        // What percentage of the books were written between these two years
-        // (inclusive)?
+        final double percentageOfBooks;
+        final int totalNumberBooks;
+        int bookCounter;
+
+        totalNumberBooks = novels.size();
+        bookCounter = 0;
+
+        if (totalNumberBooks == 0) {
+            System.out.println("No books available to calculate percentage.");
+            return;
+        }
+
+        for(Novel novel : novels)
+        {
+            final int yearPublished;
+
+            yearPublished = novel.getYearPublished();
+
+            if(yearPublished >= first && yearPublished <= last)
+            {
+                bookCounter++;
+            }
+        }
+
+        percentageOfBooks = ((double) bookCounter /totalNumberBooks) * 100;
+
+        System.out.println("Percentage of books: " + percentageOfBooks + "%");
     }
 
     public void getOldestBook()
