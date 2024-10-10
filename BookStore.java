@@ -166,7 +166,7 @@ public class BookStore
 
         for(Novel novel : novels)
         {
-            if(novel.getYearPublished() < upperLimit && novel.getYearPublished() >= lowerLimit)
+            if(novel.getYearPublished() <= upperLimit && novel.getYearPublished() >= lowerLimit)
             {
                 System.out.println(novel.getTitle());
             }
@@ -263,7 +263,7 @@ public class BookStore
         int oldestTitleYear;
         Novel oldestTitle;
 
-        oldestTitleYear = 0;
+        oldestTitleYear = Integer.MAX_VALUE;;
         oldestTitle = null;
 
         for(Novel novel : novels)
