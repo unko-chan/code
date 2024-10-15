@@ -3,13 +3,14 @@ package bcit.ca.comp2522.code;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Set;
 
 public class BookShop
 {
     private final String name;
-    private final HashMap<String, Novel> novelHashMap;
+    private final Map<String, Novel> novelHashMap;
 
     public BookShop(final String name, final List<Novel> novels)
     {
@@ -18,7 +19,7 @@ public class BookShop
         populateHashMap(novelHashMap, novels);
     }
 
-    private void populateHashMap(final HashMap<String, Novel> novelHashMap, final List<Novel> novels)
+    private void populateHashMap(final Map<String, Novel> novelHashMap, final List<Novel> novels)
     {
         for(final Novel novel : novels)
         {
